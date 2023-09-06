@@ -1,0 +1,134 @@
+
+%==========================================================
+%=========== Document Setup  ==============================
+
+% Formatting defined by class file
+\documentclass[11pt]{article}
+
+% ---- Document formatting ----
+\usepackage[margin=1in]{geometry}	% Narrower margins
+\usepackage{booktabs}				% Nice formatting of tables
+\usepackage{graphicx}	
+\usepackage{float}	
+\usepackage[section]{placeins}		% Ability to include graphics
+
+%\setlength\parindent{0pt}	% Do not indent first line of paragraphs 
+\usepackage[parfill]{parskip}		% Line space b/w paragraphs
+%	parfill option prevents last line of pgrph from being fully justified
+
+% Parskip package adds too much space around titles, fix with this
+\RequirePackage{titlesec}
+\titlespacing\section{0pt}{8pt plus 4pt minus 2pt}{3pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{4pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{2pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}
+
+% ---- Hyperlinks ----
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}	% For URL's. Automatically links internal references.
+
+% ---- Code listings ----
+\usepackage{listings} 					% Nice code layout and inclusion
+\usepackage[usenames,dvipsnames]{xcolor}	% Colors (needs to be defined before using colors)
+
+% Define custom colors for listings
+\definecolor{listinggray}{gray}{0.98}		% Listings background color
+\definecolor{rulegray}{gray}{0.7}			% Listings rule/frame color
+
+% Style for Verilog
+\lstdefinestyle{Verilog}{
+	language=Verilog,					% Verilog
+	backgroundcolor=\color{listinggray},	% light gray background
+	rulecolor=\color{blue}, 			% blue frame lines
+	frame=tb,							% lines above & below
+	linewidth=\columnwidth, 			% set line width
+	basicstyle=\small\ttfamily,	% basic font style that is used for the code	
+	breaklines=true, 					% allow breaking across columns/pages
+	tabsize=3,							% set tab size
+	commentstyle=\color{gray},	% comments in italic 
+	stringstyle=\upshape,				% strings are printed in normal font
+	showspaces=false,					% don't underscore spaces
+}
+
+% How to use: \Verilog[listing_options]{file}
+\newcommand{\Verilog}[2][]{%
+	\lstinputlisting[style=Verilog,#1]{#2}
+}
+
+
+
+
+%======================================================
+%=========== Body  ====================================
+\begin{document}
+
+\title{Class Report 1: Rotating Square Circuit}
+\author{Maddie Vorhies}
+
+\maketitle
+
+\section*{Github Repository}
+https://github.com/MaddieVorhies/ELC5396\_ClassReport1.git
+
+\section*{Summary}
+
+The purpose if this exercise was to be able to design a circuit that would circulate a square pattern in the four-digit seven-segment LED display. The square should be able to rotate both clockwise and counter-clockwise around the display. The user should also be able to pause and reset the location.\newline
+
+The SW0, SW1, and SW2 switches on the board are used to enable the rotation, choose the direction of the rotation, and reset the rotation. The circuit consists of a clockwise module that takes care of the clockwise rotation, a counter-clockwise module that takes care of the counter-clockwise rotation, two muxes that allow the user to select the clockwise or the counter-clockwise module, and an overall wrapper that brings the previous modules together. \newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline
+
+\section*{Design Sketch}
+
+\begin{figure}[ht]\centering
+	
+	\includegraphics [width=1.0\textwidth,trim=0 1100 0 300, clip]{DesignSketch}
+	\caption{Design Sketch for Rotating Square Circuit}
+	\label{fig:sim_with_table}
+	
+\end{figure}
+
+\section*{Results}
+
+The board was able to successfully rotate a sqaure around the seven-segment display in both the clockwise and counter-clockwise direction. It was also able to pause and reset the rotation of the square. \newline
+
+A testbench was created for clockwise.sv, counter\_clockwise.sv, and mux.sv. The results of each of those testbenches are shown below: \newline
+
+\begin{figure}[ht]\centering
+	
+	\includegraphics [width=1.0\textwidth]{mux_test}
+	\caption{Simulation Waveform and of mux.sv}
+	\label{fig:sim_with_table}
+	
+\end{figure}
+
+Figure 2 shows the results a simple testbench that tests to see if the mux will switch from a\_in to b\_in when the control signal (sel) is changed. When sel is high, the output of the mux should read 1 and when sel is low, the output of the mux should read 0.
+
+\begin{figure}[ht]\centering
+	
+	\includegraphics [width=1.0\textwidth]{clockwise_test}
+	\caption{Simulation Waveform and of clockwise.sv}
+	\label{fig:sim_with_table}
+	
+\end{figure}
+
+Figure 3 shows the results of the testbench that tests the rotation of the square in a clockwise direction. The an signal shows which digit the square will light up on and the sseg signal shows if the square will be on the top half or bottom half of the digit. This testbench also tests to see if the rotation will pause when the enable (en) signal is low.  
+
+\begin{figure}[ht]\centering
+	
+	\includegraphics [width=1.0\textwidth]{counter_clockwise_test}
+	\caption{Simulation Waveform and of counter\_clockwise.sv}
+	\label{fig:sim_with_table}
+	
+\end{figure}
+
+Figure 4 shows the results of the testbench that tests the rotation of the square in a counter-clockwise direction. This testbench is set up identically to the clockwise testbench. The difference is waveforms is shown in the sseg signal. Both waveforms in Figure 3 and Figure 4 have the same an signal, but their sseg signals are opposite of each other. This is to be expected. That is how the direction of the square is adjusted from clockwise to counter-clockwise. 
+
+\section*{Code}
+
+\Verilog{ClassReport1.srcs/sources_1/new/clockwise.sv}
+
+\Verilog{ClassReport1.srcs/sources_1/new/counter_clockwise.sv}
+
+\Verilog{ClassReport1.srcs/sources_1/new/mux.sv}
+
+\Verilog{ClassReport1.srcs/sources_1/new/wrapper.sv}
+
+
+\end{document}
