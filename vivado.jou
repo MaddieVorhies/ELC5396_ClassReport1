@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:48:09 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Tue Sep  5 20:39:48 2023
+# Process ID: 20592
+# Current directory: C:/Users/maddie_vorhies1/Box/SoC/ClassReport1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent4876 C:\Users\maddie_vorhies1\Box\SoC\ClassReport1\ClassReport1.xpr
+# Log file: C:/Users/maddie_vorhies1/Box/SoC/ClassReport1/vivado.log
+# Journal file: C:/Users/maddie_vorhies1/Box/SoC/ClassReport1\vivado.jou
+# Running On: ROG-112-08, OS: Windows, CPU Frequency: 3192 MHz, CPU Physical cores: 6, Host memory: 34145 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/maddie_vorhies1/Box/SoC/ClassReport1/ClassReport1.xpr
+update_compile_order -fileset sources_1
